@@ -72,10 +72,17 @@ Initial Random Forest model achieved:
 
 ## Repository Structure
 notebooks/
-├── 01_data_understanding.ipynb
-├── 02_feature_engineering.ipynb
-├── 03_modeling_random_forest.ipynb
-└── 04_model_evaluation.ipynb
+-Anchor Database with all properties: 1nfanchordataset.ipynb
+-Utility and code violation imports: 311imports to duckdb.ipynb
+-Decoding tax delinquency file: decodingandloadingDelinquentTaxDatefile.ipynb
+-Loading decoded tax delinquency file into DuckDB: delinquinttaxesloadintoduckdb.ipynb
+-Feature engineering on tax delinquency: taxdelinquentfeatureengineering.ipynb
+-Final Machine Learning Database Table: rebuilt ML table for tax delinquency.ipynb
+-Machine Learning Table EDA and Random Forest Model: ML predicting delinquency EDA.ipynb
+***Future data for motivated seller prediction models
+-Deed transfer file parsed for grantees only: deedtransferdatascript buyers.ipynb
+-Deed transfer file parsed for grantors only: deedtransferdatascriptsellers.ipynb
+-Entity matching deed files to County Appraisal files using SPLINK (Anchor database): entitymatching.ipynb
 
 
 ## How to Run
