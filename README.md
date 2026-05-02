@@ -41,20 +41,21 @@ Raw Files → DuckDB Warehouse → Feature Tables → ML Model → Scored Output
 ## Feature Engineering
 Key feature groups include:
 - Ownership tenure
-- Absentee ownership indicators
-- 311 complaint frequency and severity
-- Property valuation and structure features
+- Ownership snapshot windows by calendar year
+- 311(city code violation) complaint frequency and severity
+- Civil Court Filing timelines and types of court filings
+- Probate timeilne
 
 
 
 ## Modeling
-- Random Forest predicting current property tax delinquency (baseline model)
-- Logistic Regression (planned comparison)
+- Random Forest predicting motivated seller
+- Logistic Regression (initial baseline model)
 
 
 
 ## Evaluation
-Due to heavy class imbalance (~3% positive cases), evaluation focuses on:
+Due to heavy class imbalance (a motivated seller is not a common event), evaluation focuses on:
 
 - ROC-AUC
 - Precision / Recall
@@ -64,25 +65,18 @@ Due to heavy class imbalance (~3% positive cases), evaluation focuses on:
 
 
 ## Preliminary Results
-Initial Random Forest model achieved:
-- ROC-AUC ≈ 0.83
-- Strong separation in an imbalanced dataset
+Initial Random Forest model achieved (note, baseline seller rate is 9.5%):
+- ROC-AUC ≈ 0.543849411914147
+- Precision: .08
+- Recall: .68
+- F1: .14
+
 
 
 
 ## Repository Structure
 notebooks/
--Anchor Database with all properties: 1nfanchordataset.ipynb
--Utility and code violation imports: 311imports to duckdb.ipynb
--Decoding tax delinquency file: decodingandloadingDelinquentTaxDatefile.ipynb
--Loading decoded tax delinquency file into DuckDB: delinquinttaxesloadintoduckdb.ipynb
--Feature engineering on tax delinquency: taxdelinquentfeatureengineering.ipynb
--Final Machine Learning Database Table: rebuilt ML table for tax delinquency.ipynb
--Machine Learning Table EDA and Random Forest Model: ML predicting delinquency EDA.ipynb
-***Future data for motivated seller prediction models
--Deed transfer file parsed for grantees only: deedtransferdatascript buyers.ipynb
--Deed transfer file parsed for grantors only: deedtransferdatascriptsellers.ipynb
--Entity matching deed files to County Appraisal files using SPLINK (Anchor database): entitymatching.ipynb
+
 
 
 ## How to Run
@@ -102,17 +96,17 @@ This repository focuses on **methodology, modeling, and reproducibility**.
 
 
 ## Key Challenges
-- Severe class imbalance (only 3% of properties are currently tax delinquent)
-- Multi-source data integration
+- Severe class imbalance with Target variable of motivated seller, rare probate events 760 events out of 1,048,00 properties.
+- Multi-source data integration from governmental sources
 - Entity resolution (matching records across datasets)
 
 
 
 ## Next Steps
 - Expand ownership-history modeling
-- Improve deed-to-property matching
-- Add additional target variables (e.g., distressed sale pricing)
+- Add additional target variables (e.g., distressed sale pricing, need access to Multiple Listings Site)
 - Deploy pipeline to Azure
+- Data goes back to 2015 - need to source more historical data. This may help with imbalances.
 - Build front-end application for property scoring
 
 
